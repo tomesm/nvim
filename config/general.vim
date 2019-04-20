@@ -1,6 +1,5 @@
-""""""""""""""""""""""
-"      Settings      "
-""""""""""""""""""""""
+""" General Settings """
+
 set nocompatible                " Enables us Vim specific features
 filetype off                    " Reset filetype detection first ...
 filetype plugin indent on       " ... and enable filetype detection
@@ -85,11 +84,7 @@ nmap <CR> o<Esc>
 inoremap <C-]> <C-o>$
 "inoremap <C-[> <C-o>0
 
-" Snippets"
-let g:go_snippet_engine = "ultisnips"
-let g:UltiSnipsExpandTrigger="<tab>"
-
-" SEARCH"
+""" Search
 
 " Open quickfix window vertically with width of 60"
 nnoremap F *:grep! "\b<C-R><C-W>\b"<CR>:vertical cw 60<CR><CR>
@@ -140,14 +135,12 @@ endif
 "vnoremap <c-v> "+P
 
 " Cursor move in insert mode with Alt-"
-
 inoremap ˙ <C-o>h
 inoremap ∆ <C-o>j
 inoremap ˚ <C-o>k
 inoremap ¬ <C-o>l
 
 " Moving lines up/down"
-
 nnoremap <C-j> :m .+1<CR>==
 nnoremap <C-k> :m .-2<CR>==
 inoremap <C-j> <Esc>:m .+1<CR>==gi
@@ -156,7 +149,6 @@ vnoremap <C-j> :m '>+1<CR>gv=gv
 vnoremap <C-k> :m '<-2<CR>gv=gv
 
 "Map F12 to save in any mode
-
 noremap <silent> <F12>          :update<CR>
 vnoremap <silent> <F12>         <C-C>:update<CR>
 inoremap <silent> <F12>         <C-O>:update<CR><Esc>
@@ -164,3 +156,24 @@ inoremap <silent> <F12>         <C-O>:update<CR><Esc>
 " close
 nnoremap <c-q> :wq <CR><CR>
 inoremap <c-q> <Esc>:q <CR><CR>
+
+" intelligent comments
+set comments=sl:/*,mb:\ *,elx:\ */
+
+" Highlight trailing spaces
+" http://vim.wikia.com/wiki/Highlight_unwanted_spaces
+highlight ExtraWhitespace ctermbg=red guibg=red
+match ExtraWhitespace /\s\+$/
+autocmd BufWinEnter * match ExtraWhitespace /\s\+$/
+autocmd InsertEnter * match ExtraWhitespace /\s\+\%#\@<!$/
+autocmd InsertLeave * match ExtraWhitespace /\s\+$/
+autocmd BufWinLeave * call clearmatches()
+
+" we also want to get rid of accidental trailing whitespace on save
+autocmd BufWritePre * :%s/\s\+$//e
+
+" highlight the last column
+highlight ColorColumn ctermbg=darkgray
+
+" matching braces
+inoremap {<CR> {<CR>}<C-o>O
