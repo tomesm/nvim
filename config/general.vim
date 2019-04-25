@@ -23,7 +23,7 @@ set hidden                      " Buffer should still exist if window is closed
 set fileformats=unix,dos,mac    " Prefer Unix over Windows over OS 9 formats
 set noshowmatch                 " Do not show matching brackets by flickering
 set noshowmode                  " We show the mode with airline or lightline
-"set ignorecase                  " Search case insensitive...
+set ignorecase                  " Search case insensitive...
 "set smartcase                   " ... but not it begins with upper case
 set completeopt=longest,noinsert    " Show popup menu, even if there is one entry
 set pumheight=14                " Completion window max size
@@ -36,6 +36,7 @@ set modifiable
 "set infercase
 set noexpandtab tabstop=4 shiftwidth=4
 set cmdheight=2
+set listchars=tab:\|\ ,trail:▫
 
 
 set colorcolumn=100
@@ -64,11 +65,17 @@ set guifont=Monospace\ 16
 
 set background=dark
 
+" Popup menu colors
+hi Pmenu ctermfg=NONE ctermbg=236 cterm=NONE guifg=NONE guibg=#64666d gui=NONE
+hi PmenuSel ctermfg=NONE ctermbg=24 cterm=NONE guifg=NONE guibg=#204a87 gui=NONE
+
 
 " VIM MISC SETINGS
 imap kk <Esc>
 nmap ; :
 vmap ; :
+
+let mapleader = ","
 
 " Exit visual mode with CR"
 vmap <CR> <Esc>
@@ -154,8 +161,8 @@ vnoremap <silent> <F12>         <C-C>:update<CR>
 inoremap <silent> <F12>         <C-O>:update<CR><Esc>
 
 " close
-nnoremap <c-q> :wq <CR><CR>
-inoremap <c-q> <Esc>:q <CR><CR>
+nnoremap <c-q> :q <CR><CR>
+inoremap <c-q> <Esc>:wq <CR><CR>
 
 " intelligent comments
 set comments=sl:/*,mb:\ *,elx:\ */

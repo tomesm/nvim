@@ -3,18 +3,10 @@
 " Autostart
 let g:deoplete#enable_at_startup = 1
 
-"Deoplete settings
-call deoplete#custom#option('ignore_case', v:true)
-call deoplete#custom#option('omni_patterns', { 'go': '[^. *\t]\.\w*' }) " Golang specific pattern
-
-" Popup menu colors
-hi Pmenu ctermfg=NONE ctermbg=236 cterm=NONE guifg=NONE guibg=#64666d gui=NONE
-hi PmenuSel ctermfg=NONE ctermbg=24 cterm=NONE guifg=NONE guibg=#204a87 gui=NONE
-
 " Close popup and fill candidate with Enter
 inoremap <expr><CR> pumvisible()? "\<C-y>" : "\<CR>"
   
-
+call deoplete#custom#source('_', 'converters', ['converter_auto_paren'])
 
 
 """ Ultisnips """
@@ -25,12 +17,27 @@ let g:UltiSnipsExpandTrigger="<tab>"
 
 
 
+""" Neopairs """
+let g:neopairs#enable = 1
+
+
+
+
 """ Dash """
 
 " Open doc for a word under cursor
 inoremap <F10> <Esc>:Dash <CR> i
 nnoremap <F10> :Dash <CR>
 
+
+
+""" Auto save """
+
+"NOTE: turned off because conflicting with gofmt on save
+
+"let g:auto_save = 1
+"let g:auto_save_silent = 1 
+"let g:auto_save_no_updatetime = 1
 
 
 
@@ -64,7 +71,7 @@ autocmd VimEnter * nested :TagbarOpen
 nnoremap <silent> <F5> :TagbarToggle<CR>
 
 " Tagbar settings
-let g:tagbar_width = 30
+let g:tagbar_width = 40
 let g:tagbar_left = 1
 let g:tagbar_autoshowtag = 1
 
@@ -72,4 +79,4 @@ let g:tagbar_autoshowtag = 1
 
 
 " Emmet"
-let g:user_emmet_leader_key=','
+let g:user_emmet_leader_key='-'

@@ -1,5 +1,8 @@
 " PLUGIN MANAGER SETTIGS( vim-plug)
 
+filetype on
+filetype plugin on
+
 call plug#begin('~/.config/nvim/plugged')
 
 Plug 'AndrewRadev/splitjoin.vim'
@@ -16,8 +19,6 @@ Plug 'Shougo/echodoc.vim'
 Plug 'Shougo/neopairs.vim'
 
 Plug 'SirVer/ultisnips'
-
-"Plug 'honza/vim-snippets'
 
 Plug 'vim-scripts/vim-auto-save'
 
@@ -41,7 +42,7 @@ Plug 'tpope/vim-surround'
 Plug 'ctrlpvim/ctrlp.vim'
 
 " Golang
-Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' } 
+Plug 'fatih/vim-go', { 'branch': 'master' } 
 Plug 'jodosha/vim-godebug'
 
 Plug 'vim-syntastic/syntastic'
