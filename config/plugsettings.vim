@@ -4,9 +4,25 @@
 let g:deoplete#enable_at_startup = 1
 
 " Close popup and fill candidate with Enter
-inoremap <expr><CR> pumvisible()? "\<C-y>" : "\<CR>"
+"inoremap <expr><CR> pumvisible()? "\<C-y>" : "\<CR>"
   
-call deoplete#custom#source('_', 'converters', ['converter_auto_paren'])
+"call deoplete#custom#source('_', 'converters', ['converter_auto_paren'])
+
+"autocmd InsertLeave,CompleteDone * if pumvisible() == 0 | pclose | endif
+
+"let g:python3_host_prog = '/Users/martin/Library/Mobile Documents/com~apple~CloudDocs/repos/python/neovim/bin/python3'
+
+
+
+""" Virtualenv """
+let g:virtualenv_auto_activate = 1
+
+
+
+""" Python highlight """
+let g:python_highlight_all = 1
+let g:Python3Syntax=1
+
 
 
 """ Ultisnips """
@@ -16,9 +32,39 @@ let g:UltiSnipsExpandTrigger="<tab>"
 
 
 
+""" jedi-vim """
+
+" disable autocompletion, cause we use deoplete for completion
+let g:jedi#completions_enabled = 0
+
+" open the go-to function in split, not another buffer
+let g:jedi#use_splits_not_buffers = "right"
+
+
+
+""" Neoformat """
+
+" Enable alignment
+let g:neoformat_basic_format_align = 1
+
+" Enable tab to spaces conversion
+let g:neoformat_basic_format_retab = 1
+
+" Enable trimmming of trailing whitespace
+let g:neoformat_basic_format_trim = 1
+
+
+
+""" Neomake """
+
+let g:neomake_python_enabled_makers = ['pylint']
+call neomake#configure#automake('nrwi', 500)
+
+
+
 
 """ Neopairs """
-let g:neopairs#enable = 1
+"let g:neopairs#enable = 1
 
 
 

@@ -16,7 +16,9 @@ Plug 'deoplete-plugins/deoplete-go', { 'do': 'make'}
 Plug 'deoplete-plugins/deoplete-jedi' " Python intellisense
 
 Plug 'Shougo/echodoc.vim'
-Plug 'Shougo/neopairs.vim'
+"Plug 'Shougo/neopairs.vim'
+
+Plug 'jiangmiao/auto-pairs'
 
 Plug 'SirVer/ultisnips'
 
@@ -41,9 +43,19 @@ Plug 'tpope/vim-surround'
 
 Plug 'ctrlpvim/ctrlp.vim'
 
+" Python
+
+"Plug 'zchee/deoplete-jedi'
+Plug 'davidhalter/jedi-vim'
+Plug 'sbdchd/neoformat'
+Plug 'neomake/neomake'
+Plug 'hdima/python-syntax'
+Plug 'jmcantrell/vim-virtualenv'
+
+
 " Golang
 Plug 'fatih/vim-go', { 'branch': 'master' } 
-Plug 'jodosha/vim-godebug'
+"Plug 'jodosha/vim-godebug'
 
 Plug 'vim-syntastic/syntastic'
 

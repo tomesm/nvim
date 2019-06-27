@@ -1,3 +1,4 @@
+
 """ Golang autocommands """
 
 augroup go
