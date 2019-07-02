@@ -14,6 +14,8 @@ let g:deoplete#enable_at_startup = 1
 
 
 
+
+
 """ Virtualenv """
 let g:virtualenv_auto_activate = 1
 
@@ -102,7 +104,7 @@ nnoremap <silent> <F6> :NERDTreeToggle<CR>
 let g:NERDTreeWinSize=25
 let g:NERDTreeShowHidden=0
 let g:NERDTreeMapOpenRecursively=1
-let g:NERDTreeWinPos="right"
+let g:NERDTreeWinPos="left"
 
 
 

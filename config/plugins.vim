@@ -51,6 +51,7 @@ Plug 'sbdchd/neoformat'
 Plug 'neomake/neomake'
 Plug 'hdima/python-syntax'
 Plug 'jmcantrell/vim-virtualenv'
+Plug 'numirias/semshi', {'do': ':UpdateRemotePlugins'}
 
 
 " Golang

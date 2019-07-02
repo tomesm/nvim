@@ -57,7 +57,7 @@ autocmd ColorScheme * highlight ExtraWhitespace ctermbg=red guibg=red
 let g:airline_theme='solarized'
 
 " chosen syntax color
-colorscheme solarized8_low
+colorscheme solarized8_dark_low
 let g:solarized_use16 = 1
 " font size
 
