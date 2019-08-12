@@ -15,3 +15,6 @@ function MyCustomHighlights()
 endfunction
 
 call MyCustomHighlights()
+
+set colorcolumn=79
+highlight ColorColumn ctermbg=darkgray   
