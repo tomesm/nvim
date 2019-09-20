@@ -7,7 +7,7 @@ set ttyfast                     " Indicate fast terminal conn for faster redraw
 set laststatus=2                " Show status line always
 set encoding=utf-8              " Set default encoding to UTF-8
 set autoread                    " Automatically read changed files
-set autoindent                  " Enabile Autoindent
+set autoindent                  " Enable Autoindent
 set backspace=indent,eol,start  " Makes backspace key more powerful.
 set incsearch                   " Shows the match while typing
 set hlsearch                    " Highlight found searches
@@ -39,7 +39,7 @@ set cmdheight=2
 set listchars=tab:\|\ ,trail:▫
 
 
-set colorcolumn=100
+set colorcolumn=80
 highlight ColorColumn ctermbg=darkgray
 
 " Thin cursor"
@@ -73,6 +73,8 @@ set background=dark
 
 
 " VIM MISC SETINGS
+
+
 imap kk <Esc>
 nmap ; :
 vmap ; :

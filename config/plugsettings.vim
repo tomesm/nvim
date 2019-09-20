@@ -1,19 +1,18 @@
-""" Deoplete + Autocompletion """
+""" Kite python autocompletion """"
 
-" Autostart
-let g:deoplete#enable_at_startup = 1
+let g:kite_tab_complete=1
 
-" Close popup and fill candidate with Enter
-"inoremap <expr><CR> pumvisible()? "\<C-y>" : "\<CR>"
-  
-"call deoplete#custom#source('_', 'converters', ['converter_auto_paren'])
+set completeopt+=menuone   " show the popup menu even when there is only 1 match
 
-"autocmd InsertLeave,CompleteDone * if pumvisible() == 0 | pclose | endif
+set completeopt+=preview
 
-"let g:python3_host_prog = '/Users/martin/Library/Mobile Documents/com~apple~CloudDocs/repos/python/neovim/bin/python3'
+"automatically close preview window"
+autocmd CompleteDone * if !pumvisible() | pclose | endif 
 
+let g:kite_documentation_continual=1
 
-
+set statusline=%<%f\ %h%m%r%{kite#statusline()}%=%-14.(%l,%c%V%)\ %P
+set laststatus=2  " always display the status line
 
 
 """ Virtualenv """
@@ -119,7 +118,7 @@ autocmd VimEnter * nested :TagbarOpen
 nnoremap <silent> <F5> :TagbarToggle<CR>
 
 " Tagbar settings
-let g:tagbar_width = 40
+let g:tagbar_width = 30
 let g:tagbar_left = 1
 let g:tagbar_autoshowtag = 1
 
@@ -128,3 +127,21 @@ let g:tagbar_autoshowtag = 1
 
 " Emmet"
 let g:user_emmet_leader_key='-'
+
+
+
+
+
+""" Deoplete """
+
+" Autostart
+"let g:deoplete#enable_at_startup = 1
+
+" Close popup and fill candidate with Enter
+"inoremap <expr><CR> pumvisible()? "\<C-y>" : "\<CR>"
+  
+"call deoplete#custom#source('_', 'converters', ['converter_auto_paren'])
+
+"autocmd InsertLeave,CompleteDone * if pumvisible() == 0 | pclose | endif
+
+"let g:python3_host_prog = '/Users/martin/Library/Mobile Documents/com~apple~CloudDocs/repos/python/neovim/bin/python3'

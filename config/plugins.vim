@@ -5,33 +5,36 @@ filetype plugin on
 
 call plug#begin('~/.config/nvim/plugged')
 
-Plug 'AndrewRadev/splitjoin.vim'
+" Utils
 
+"Plug 'AndrewRadev/splitjoin.vim'
 Plug 'rizzatti/dash.vim'
-
 Plug 'wakatime/vim-wakatime'
+"Plug 'vim-scripts/vim-auto-save'
+Plug 'mattn/emmet-vim'
 
-Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
-Plug 'deoplete-plugins/deoplete-go', { 'do': 'make'}
-Plug 'deoplete-plugins/deoplete-jedi' " Python intellisense
 
-Plug 'Shougo/echodoc.vim'
-"Plug 'Shougo/neopairs.vim'
+" Autocompletion
 
 Plug 'jiangmiao/auto-pairs'
+"Plug 'SirVer/ultisnips'
+Plug 'tpope/vim-surround'
 
-Plug 'SirVer/ultisnips'
+"Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+"Plug 'deoplete-plugins/deoplete-go', { 'do': 'make'}
+"Plug 'deoplete-plugins/deoplete-jedi' " Python intellisense
+"Plug 'zchee/deoplete-jedi'
+"Plug 'davidhalter/jedi-vim'
+"Plug 'Shougo/neopairs.vim'
+"Plug 'Shougo/echodoc.vim'
 
-Plug 'vim-scripts/vim-auto-save'
 
-Plug 'majutsushi/tagbar'
-
-Plug 'scrooloose/nerdtree'
-Plug 'scrooloose/nerdcommenter'
-Plug 'Xuyuanp/nerdtree-git-plugin'
+" Git
 
 Plug 'tpope/vim-fugitive' " GIT support
 Plug 'airblade/vim-gitgutter' " Git marking
+
+" Appearance
 
 Plug 'flazz/vim-colorschemes'
 Plug 'lifepillar/vim-solarized8'
@@ -39,34 +42,42 @@ Plug 'lifepillar/vim-solarized8'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 
-Plug 'tpope/vim-surround'
+Plug 'ryanoasis/vim-devicons'
 
-Plug 'ctrlpvim/ctrlp.vim'
+"Plug 'vim-syntastic/syntastic'
+
+"Navigation
+
+Plug 'scrooloose/nerdtree'
+Plug 'scrooloose/nerdcommenter'
+Plug 'Xuyuanp/nerdtree-git-plugin'
+Plug 'majutsushi/tagbar'
 
 " Python
 
-"Plug 'zchee/deoplete-jedi'
-Plug 'davidhalter/jedi-vim'
-Plug 'sbdchd/neoformat'
+
 Plug 'neomake/neomake'
+Plug 'sbdchd/neoformat'
 Plug 'hdima/python-syntax'
 Plug 'jmcantrell/vim-virtualenv'
+
 Plug 'numirias/semshi', {'do': ':UpdateRemotePlugins'}
 
 
 " Golang
-Plug 'fatih/vim-go', { 'branch': 'master' } 
+
+"Plug 'fatih/vim-go', { 'branch': 'master' } 
 "Plug 'jodosha/vim-godebug'
 
-Plug 'vim-syntastic/syntastic'
-
-Plug 'mattn/emmet-vim'
-
-Plug 'ryanoasis/vim-devicons'
 
 " Find and replace"
+
+Plug 'ctrlpvim/ctrlp.vim'
 Plug 'brooth/far.vim'
 
+" Devops"
+
+Plug 'chase/vim-ansible-yaml'
 Plug 'ekalinin/Dockerfile.vim'
 
 " Add plugins to &runtimepath
