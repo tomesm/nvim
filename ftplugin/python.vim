@@ -6,15 +6,6 @@ setlocal autoindent
 setlocal smarttab
 setlocal formatoptions=croql
 
-""" Semshi syntax highlight """
-function MyCustomHighlights()
-    hi semshiGlobal    ctermfg=red
-    hi semshiBuiltin   ctermfg=red
-    hi semshiAttribute ctermfg=36
-    hi semshiSelected  ctermfg=231 ctermbg=24
-endfunction
-
-call MyCustomHighlights()
-
-set colorcolumn=79
+set colorcolumn=80
 highlight ColorColumn ctermbg=darkgray   
+
