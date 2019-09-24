@@ -1,15 +1,6 @@
 " NEO VIM  settings - customized for python
 " Author: Martin Tomes
 
-"source $HOME/.config/nvim/config/plugins.vim
-"source $HOME/.config/nvim/config/plugsettings.vim
-"source $HOME/.config/nvim/config/autocommands.vim
-"source $HOME/.config/nvim/config/general.vim
-
-
-"filetype on
-"filetype plugin on
-
 
 " PLUGIN MANAGER SETTIGS( vim-plug)
 
@@ -21,23 +12,20 @@ call plug#begin('~/.config/nvim/plugged')
 "Plug 'AndrewRadev/splitjoin.vim'
 Plug 'rizzatti/dash.vim'
 Plug 'wakatime/vim-wakatime'
-"Plug 'vim-scripts/vim-auto-save'
+Plug 'jiangmiao/auto-pairs'
+Plug 'SirVer/ultisnips'
+Plug 'tpope/vim-surround'
+Plug 'vim-scripts/vim-auto-save'
 Plug 'mattn/emmet-vim'
 
 
 " Autocompletion
 
-Plug 'jiangmiao/auto-pairs'
-"Plug 'SirVer/ultisnips'
-Plug 'tpope/vim-surround'
+Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' } " Autocompletion engine
 
-"Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
-"Plug 'deoplete-plugins/deoplete-go', { 'do': 'make'}
-"Plug 'deoplete-plugins/deoplete-jedi' " Python intellisense
-"Plug 'zchee/deoplete-jedi'
-"Plug 'davidhalter/jedi-vim'
-"Plug 'Shougo/neopairs.vim'
-"Plug 'Shougo/echodoc.vim'
+Plug 'deoplete-plugins/deoplete-jedi' " Python intellisense 
+
+"Plug 'deoplete-plugins/deoplete-go', { 'do': 'make'} " Golang autocompletion
 
 
 " Git
@@ -146,8 +134,8 @@ syntax enable
 
 " Popup menu colors
 
-hi Pmenu ctermfg=NONE ctermbg=236 cterm=NONE guifg=NONE guibg=#64666d gui=NONE
-hi PmenuSel ctermfg=NONE ctermbg=24 cterm=NONE guifg=NONE guibg=#204a87 gui=NONE
+"hi Pmenu ctermfg=NONE ctermbg=236 cterm=NONE guifg=NONE guibg=#64666d gui=NONE
+"hi PmenuSel ctermfg=NONE ctermbg=24 cterm=NONE guifg=NONE guibg=#204a87 gui=NONE
 
 autocmd ColorScheme * highlight ExtraWhitespace ctermbg=red guibg=red
 
@@ -164,8 +152,8 @@ set guifont=Monospace\ 16
 set background=dark
 
 " Popup menu colors
-"hi Pmenu ctermfg=NONE ctermbg=236 cterm=NONE guifg=NONE guibg=#64666d gui=NONE
-"hi PmenuSel ctermfg=NONE ctermbg=24 cterm=NONE guifg=NONE guibg=#204a87 gui=NONE
+hi Pmenu ctermfg=NONE ctermbg=236 cterm=NONE guifg=NONE guibg=#64666d gui=NONE
+hi PmenuSel ctermfg=NONE ctermbg=24 cterm=NONE guifg=NONE guibg=#204a87 gui=NONE
 
 
 set colorcolumn=80
@@ -184,6 +172,7 @@ let &t_EI = "\<Esc>Ptmux;\<Esc>\<Esc>]50;CursorShape=0\x7\<Esc>\\"
 
 
 imap kk <Esc>
+
 nmap ; :
 vmap ; :
 
@@ -316,10 +305,13 @@ set completeopt+=preview
 "automatically close preview window"
 autocmd CompleteDone * if !pumvisible() | pclose | endif 
 
-let g:kite_documentation_continual=1
+"let g:kite_documentation_continual=1
 
 set statusline=%<%f\ %h%m%r%{kite#statusline()}%=%-14.(%l,%c%V%)\ %P
 set laststatus=2  " always display the status line
+
+"nmap <silent> <buffer> gK <Plug>(kite-docs)
+"imap <silent> <buffer> gK <Plug>(kite-docs)
 
 
 """ Virtualenv """
@@ -359,6 +351,9 @@ let g:UltiSnipsExpandTrigger="<tab>"
 
 " open the go-to function in split, not another buffer
 "let g:jedi#use_splits_not_buffers = "right"
+
+let g:jedi#auto_vim_configuration = 1
+let g:jedi#show_call_signatures = 2
 
 
 
@@ -450,15 +445,15 @@ let g:user_emmet_leader_key='-'
 """ Deoplete """
 
 " Autostart
-"let g:deoplete#enable_at_startup = 1
+let g:deoplete#enable_at_startup = 1
 
 " Close popup and fill candidate with Enter
-"inoremap <expr><CR> pumvisible()? "\<C-y>" : "\<CR>"
+inoremap <expr><CR> pumvisible()? "\<C-y>" : "\<CR>"
   
-"call deoplete#custom#source('_', 'converters', ['converter_auto_paren'])
+call deoplete#custom#source('_', 'converters', ['converter_auto_paren'])
 
-"autocmd InsertLeave,CompleteDone * if pumvisible() == 0 | pclose | endif
+autocmd InsertLeave,CompleteDone * if pumvisible() == 0 | pclose | endif
 
-"let g:python3_host_prog = '/Users/martin/Library/Mobile Documents/com~apple~CloudDocs/repos/python/neovim/bin/python3'
+let g:python3_host_prog = '/Users/martin/.config/nvim/env/bin/python3'
 
 
