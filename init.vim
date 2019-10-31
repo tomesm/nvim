@@ -49,8 +49,6 @@ Plug 'ekalinin/Dockerfile.vim'
 " Add plugins to &runtimepath
 call plug#end()
 
-
-
 """ General Settings """
 
 set nocompatible                " Enables us Vim specific features
