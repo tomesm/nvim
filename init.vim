@@ -1,4 +1,5 @@
-" NEO VIM  settings - customized for python
+" NEO VIM  settings - customized for DevOps
+"
 " Author: Martin Tomes
 
 
@@ -9,26 +10,10 @@ call plug#begin('~/.config/nvim/plugged')
 
 " Utils
 
-"Plug 'AndrewRadev/splitjoin.vim'
-Plug 'rizzatti/dash.vim'
 Plug 'wakatime/vim-wakatime'
 Plug 'jiangmiao/auto-pairs'
 Plug 'SirVer/ultisnips'
 Plug 'tpope/vim-surround'
-" Plug 'vim-scripts/vim-auto-save'
-Plug 'mattn/emmet-vim'
-
-
-""" Autocompletion """
-
-
-Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' } " Autocompletion engine
-
-" Python autocompletion"
-Plug 'deoplete-plugins/deoplete-jedi' " Python intellisense 
-Plug 'davidhalter/jedi-vim' " Static analysis / function jump
-"Plug 'deoplete-plugins/deoplete-go', { 'do': 'make'} " Golang autocompletion
-
 
 " Git
 
@@ -45,32 +30,11 @@ Plug 'vim-airline/vim-airline-themes'
 
 Plug 'ryanoasis/vim-devicons'
 
-"Plug 'vim-syntastic/syntastic'
-
 "Navigation
 
 Plug 'scrooloose/nerdtree'
 Plug 'scrooloose/nerdcommenter'
 Plug 'Xuyuanp/nerdtree-git-plugin'
-Plug 'majutsushi/tagbar'
-
-" Python
-
-
-Plug 'neomake/neomake'
-Plug 'sbdchd/neoformat'
-Plug 'jmcantrell/vim-virtualenv'
-
-"Plug 'numirias/semshi', {'do': ':UpdateRemotePlugins'}
-
-"Plug 'KeitaNakamura/highlighter.nvim', { 'do': ':UpdateRemotePlugins' }
-
-
-" Golang
-
-"Plug 'fatih/vim-go', { 'branch': 'master' } 
-"Plug 'jodosha/vim-godebug'
-
 
 " Find and replace"
 
@@ -92,7 +56,7 @@ call plug#end()
 set nocompatible                " Enables us Vim specific features
 filetype off                    " Reset filetype detection first ...
 filetype plugin indent on       " ... and enable filetype detection
-set ttyfast                     " Indicate fast terminal conn for faster redraw         
+set ttyfast                     " Indicate fast terminal conn for faster redraw
 set laststatus=2                " Show status line always
 set encoding=utf-8              " Set default encoding to UTF-8
 set autoread                    " Automatically read changed files
@@ -201,7 +165,7 @@ inoremap <C-]> <C-o>$
 nnoremap F *:grep! "\b<C-R><C-W>\b"<CR>:vertical cw 60<CR><CR>
 
 " Quickfix navigation"
-nnoremap <silent> <leader>] :cnext<CR>  
+nnoremap <silent> <leader>] :cnext<CR>
 nnoremap <silent> <leader>[ :cprevious<CR>
 
 " close quickfix"
@@ -289,24 +253,11 @@ autocmd BufWritePre * :%s/\s\+$//e
 highlight ColorColumn ctermbg=darkgray
 
 " matching braces
-inoremap {<CR> {<CR>}<C-o>O
-
-
-
 
 
 """ PLUGINS SETTINGS """
-
-""" Kite python autocompletion """"
-
-let g:kite_tab_complete=1
-
-set completeopt+=menuone   " show the popup menu even when there is only 1 match
-
-set completeopt+=preview
-
 "automatically close preview window"
-autocmd CompleteDone * if !pumvisible() | pclose | endif 
+autocmd CompleteDone * if !pumvisible() | pclose | endif
 
 "let g:kite_documentation_continual=1
 
@@ -317,36 +268,11 @@ set laststatus=2  " always display the status line
 "imap <silent> <buffer> gK <Plug>(kite-docs)
 
 
-""" Virtualenv """
-let g:virtualenv_auto_activate = 1
-
-
-
-""" Semshi syntax highlight """
-
-
-let g:semshi#simplify_markup = 0
-
 
 """ Ultisnips """
 
 let g:go_snippet_engine = "ultisnips"
 let g:UltiSnipsExpandTrigger="<tab>"
-
-
-
-""" jedi-vim """
-
-" disable autocompletion, cause we use deoplete for completion
-"let g:jedi#completions_enabled = 0
-
-" open the go-to function in split, not another buffer
-"let g:jedi#use_splits_not_buffers = "right"
-
-"let g:jedi#auto_vim_configuration = 1
-"let g:jedi#show_call_signatures = 2
-
-
 
 """ Neoformat """
 
@@ -358,37 +284,6 @@ let g:neoformat_basic_format_retab = 1
 
 " Enable trimmming of trailing whitespace
 let g:neoformat_basic_format_trim = 1
-
-
-
-""" Neomake """
-
-let g:neomake_python_enabled_makers = ['pylint']
-call neomake#configure#automake('nrwi', 500)
-
-
-
-
-""" Neopairs """
-"let g:neopairs#enable = 1
-
-
-
-
-""" Dash """
-
-" Open doc for a word under cursor
-inoremap <F10> <Esc>:Dash <CR> i
-nnoremap <F10> :Dash <CR>
-
-
-""" Auto save """
-
-"NOTE: conflicting with gofmt on save
-
-"let g:auto_save = 1
-"let g:auto_save_silent = 1
-"let g:auto_save_no_updatetime = 0
 
 
 """ NerdTree ""
@@ -407,43 +302,4 @@ let g:NERDTreeWinSize=25
 let g:NERDTreeShowHidden=0
 let g:NERDTreeMapOpenRecursively=1
 let g:NERDTreeWinPos="left"
-
-
-
-
-"" Tagbar """
-
-" autostart
-let g:tagbar_autoshowtag = 1
-autocmd VimEnter * nested :TagbarOpen
-
-" Toggle tagbar
-nnoremap <silent> <F5> :TagbarToggle<CR>
-
-" Tagbar settings
-let g:tagbar_width = 30
-let g:tagbar_left = 1
-let g:tagbar_autoshowtag = 1
-
-
-
-" Emmet"
-"let g:user_emmet_leader_key='-'
-
-
-
-""" Deoplete """
-
-" Autostart
-let g:deoplete#enable_at_startup = 1
-
-" Close popup and fill candidate with Enter
-inoremap <expr><CR> pumvisible()? "\<C-y>" : "\<CR>"
-  
-call deoplete#custom#source('_', 'converters', ['converter_auto_paren'])
-
-autocmd InsertLeave,CompleteDone * if pumvisible() == 0 | pclose | endif
-
-let g:python3_host_prog = '/Users/martin/.config/nvim/env/bin/python3'
-
 
