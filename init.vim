@@ -15,16 +15,18 @@ Plug 'wakatime/vim-wakatime'
 Plug 'jiangmiao/auto-pairs'
 Plug 'SirVer/ultisnips'
 Plug 'tpope/vim-surround'
-Plug 'vim-scripts/vim-auto-save'
+" Plug 'vim-scripts/vim-auto-save'
 Plug 'mattn/emmet-vim'
 
 
-" Autocompletion
+""" Autocompletion """
+
 
 Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' } " Autocompletion engine
 
+" Python autocompletion"
 Plug 'deoplete-plugins/deoplete-jedi' " Python intellisense 
-
+Plug 'davidhalter/jedi-vim' " Static analysis / function jump
 "Plug 'deoplete-plugins/deoplete-go', { 'do': 'make'} " Golang autocompletion
 
 
@@ -57,10 +59,11 @@ Plug 'majutsushi/tagbar'
 
 Plug 'neomake/neomake'
 Plug 'sbdchd/neoformat'
-Plug 'hdima/python-syntax'
 Plug 'jmcantrell/vim-virtualenv'
 
-Plug 'numirias/semshi', {'do': ':UpdateRemotePlugins'}
+"Plug 'numirias/semshi', {'do': ':UpdateRemotePlugins'}
+
+"Plug 'KeitaNakamura/highlighter.nvim', { 'do': ':UpdateRemotePlugins' }
 
 
 " Golang
@@ -320,21 +323,9 @@ let g:virtualenv_auto_activate = 1
 
 
 """ Semshi syntax highlight """
-function MyCustomHighlights()
-    hi semshiGlobal    ctermfg=red
-    hi semshiBuiltin   ctermfg=red
-    hi semshiAttribute ctermfg=36
-    hi semshiSelected  ctermfg=231 ctermbg=24
-endfunction
-
-call MyCustomHighlights()
 
 
-
-""" Python highlight """
-let g:python_highlight_all = 1
-let g:Python3Syntax=1
-
+let g:semshi#simplify_markup = 0
 
 
 """ Ultisnips """
@@ -352,8 +343,8 @@ let g:UltiSnipsExpandTrigger="<tab>"
 " open the go-to function in split, not another buffer
 "let g:jedi#use_splits_not_buffers = "right"
 
-let g:jedi#auto_vim_configuration = 1
-let g:jedi#show_call_signatures = 2
+"let g:jedi#auto_vim_configuration = 1
+"let g:jedi#show_call_signatures = 2
 
 
 
@@ -395,10 +386,9 @@ nnoremap <F10> :Dash <CR>
 
 "NOTE: conflicting with gofmt on save
 
-let g:auto_save = 1
-let g:auto_save_silent = 1 
-let g:auto_save_no_updatetime = 1
-
+"let g:auto_save = 1
+"let g:auto_save_silent = 1
+"let g:auto_save_no_updatetime = 0
 
 
 """ NerdTree ""
