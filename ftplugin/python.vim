@@ -9,5 +9,5 @@ setlocal formatoptions=croql
 set colorcolumn=80
 highlight ColorColumn ctermbg=darkgray   
 
-set completeopt-=preview
+"set completeopt-=preview
 

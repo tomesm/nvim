@@ -22,11 +22,13 @@ Plug 'mattn/emmet-vim'
 """ Autocompletion """
 
 
-Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' } " Autocompletion engine
+"Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' } " Autocompletion engine
 
 " Python autocompletion"
-Plug 'deoplete-plugins/deoplete-jedi' " Python intellisense 
+"Plug 'deoplete-plugins/deoplete-jedi' " Python intellisense 
+
 Plug 'davidhalter/jedi-vim' " Static analysis / function jump
+
 "Plug 'deoplete-plugins/deoplete-go', { 'do': 'make'} " Golang autocompletion
 
 
@@ -61,7 +63,7 @@ Plug 'neomake/neomake'
 Plug 'sbdchd/neoformat'
 Plug 'jmcantrell/vim-virtualenv'
 
-"Plug 'numirias/semshi', {'do': ':UpdateRemotePlugins'}
+Plug 'numirias/semshi', {'do': ':UpdateRemotePlugins'}
 
 "Plug 'KeitaNakamura/highlighter.nvim', { 'do': ':UpdateRemotePlugins' }
 
@@ -114,7 +116,7 @@ set noshowmatch                 " Do not show matching brackets by flickering
 set noshowmode                  " We show the mode with airline or lightline
 set ignorecase                  " Search case insensitive...
 "set smartcase                   " ... but not it begins with upper case
-set completeopt=longest,noinsert    " Show popup menu, even if there is one entry
+"set completeopt=longest,noinsert    " Show popup menu, even if there is one entry
 set pumheight=14                " Completion window max size
 "set nocursorcolumn              " Do not highlight column (speeds up highlighting)
 set nocursorline                " Do not highlight cursor (speeds up highlighting)
@@ -126,6 +128,10 @@ set modifiable
 set noexpandtab tabstop=4 shiftwidth=4
 set cmdheight=2
 set listchars=tab:\|\ ,trail:▫
+
+set completeopt+=menuone   " show the popup menu even when there is only 1 match
+set completeopt+=noinsert  " don't insert any text until user chooses a match
+set completeopt-=longest   " don't insert the longest common text
 
 
 
@@ -220,8 +226,8 @@ if executable('ag')
   " Use ag over grep
   set grepprg=ag\ --nogroup\ --nocolor
 
-  " Use ag in CtrlP for listing files. Lightning fast and respects .gitignore
-  let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
+  " Use ag in CtrlP for listing files. Lightning fast and respects .Gitignore
+  let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'                         
 
   " ag is fast enough that CtrlP doesn't need to cache
   let g:ctrlp_use_caching = 0
@@ -299,19 +305,21 @@ inoremap {<CR> {<CR>}<C-o>O
 
 """ Kite python autocompletion """"
 
-let g:kite_tab_complete=1
+"let g:kite_auto_complete=0
 
-set completeopt+=menuone   " show the popup menu even when there is only 1 match
+"let g:kite_tab_complete=1
 
-set completeopt+=preview
+"set completeopt+=menuone   " show the popup menu even when there is only 1 match
+
+"set completeopt+=preview
 
 "automatically close preview window"
-autocmd CompleteDone * if !pumvisible() | pclose | endif 
+"autocmd CompleteDone * if !pumvisible() | pclose | endif 
 
 "let g:kite_documentation_continual=1
 
-set statusline=%<%f\ %h%m%r%{kite#statusline()}%=%-14.(%l,%c%V%)\ %P
-set laststatus=2  " always display the status line
+"set statusline=%<%f\ %h%m%r%{kite#statusline()}%=%-14.(%l,%c%V%)\ %P
+"set laststatus=2  " always display the status line
 
 "nmap <silent> <buffer> gK <Plug>(kite-docs)
 "imap <silent> <buffer> gK <Plug>(kite-docs)
@@ -337,13 +345,13 @@ let g:UltiSnipsExpandTrigger="<tab>"
 
 """ jedi-vim """
 
-" disable autocompletion, cause we use deoplete for completion
-"let g:jedi#completions_enabled = 0
+" disable autocompletion, cause we use deoplete or kite for completion
+let g:jedi#completions_enabled = 0
 
 " open the go-to function in split, not another buffer
 "let g:jedi#use_splits_not_buffers = "right"
 
-"let g:jedi#auto_vim_configuration = 1
+let g:jedi#auto_vim_configuration = 1
 "let g:jedi#show_call_signatures = 2
 
 
@@ -395,9 +403,9 @@ nnoremap <F10> :Dash <CR>
 
 " autostart and put cursor in working window
 " NOTE: Currently turned of because of plugin conflicr (git branch name not showed in status/ariline)
-"autocmd VimEnter * NERDTree
-"autocmd VimEnter * wincmd p
-"autocmd VimEnter * nested :NERDTree
+autocmd VimEnter * NERDTree
+autocmd VimEnter * wincmd p
+autocmd VimEnter * nested :NERDTree
 
 " Toggle Tree
 nnoremap <silent> <F6> :NERDTreeToggle<CR>
@@ -414,8 +422,8 @@ let g:NERDTreeWinPos="left"
 "" Tagbar """
 
 " autostart
-let g:tagbar_autoshowtag = 1
-autocmd VimEnter * nested :TagbarOpen
+"let g:tagbar_autoshowtag = 1
+"autocmd VimEnter * nested :TagbarOpen
 
 " Toggle tagbar
 nnoremap <silent> <F5> :TagbarToggle<CR>
@@ -435,15 +443,15 @@ let g:tagbar_autoshowtag = 1
 """ Deoplete """
 
 " Autostart
-let g:deoplete#enable_at_startup = 1
+"let g:deoplete#enable_at_startup = 1
 
 " Close popup and fill candidate with Enter
-inoremap <expr><CR> pumvisible()? "\<C-y>" : "\<CR>"
+"inoremap <expr><CR> pumvisible()? "\<C-y>" : "\<CR>"
   
-call deoplete#custom#source('_', 'converters', ['converter_auto_paren'])
+"call deoplete#custom#source('_', 'converters', ['converter_auto_paren'])
 
-autocmd InsertLeave,CompleteDone * if pumvisible() == 0 | pclose | endif
+"autocmd InsertLeave,CompleteDone * if pumvisible() == 0 | pclose | endif
 
-let g:python3_host_prog = '/Users/martin/.config/nvim/env/bin/python3'
+"let g:python3_host_prog = '/Users/martin/.config/nvim/env/bin/python3'
 
 
