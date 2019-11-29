@@ -63,9 +63,9 @@ Plug 'neomake/neomake'
 Plug 'sbdchd/neoformat'
 Plug 'jmcantrell/vim-virtualenv'
 
-Plug 'numirias/semshi', {'do': ':UpdateRemotePlugins'}
+"Plug 'numirias/semshi', {'do': ':UpdateRemotePlugins'}
 
-"Plug 'KeitaNakamura/highlighter.nvim', { 'do': ':UpdateRemotePlugins' }
+Plug 'KeitaNakamura/highlighter.nvim', { 'do': ':UpdateRemotePlugins' }
 
 
 " Golang
@@ -140,11 +140,6 @@ set completeopt-=longest   " don't insert the longest common text
 
 syntax on
 syntax enable
-
-" Popup menu colors
-
-"hi Pmenu ctermfg=NONE ctermbg=236 cterm=NONE guifg=NONE guibg=#64666d gui=NONE
-"hi PmenuSel ctermfg=NONE ctermbg=24 cterm=NONE guifg=NONE guibg=#204a87 gui=NONE
 
 autocmd ColorScheme * highlight ExtraWhitespace ctermbg=red guibg=red
 
@@ -403,9 +398,9 @@ nnoremap <F10> :Dash <CR>
 
 " autostart and put cursor in working window
 " NOTE: Currently turned of because of plugin conflicr (git branch name not showed in status/ariline)
-autocmd VimEnter * NERDTree
-autocmd VimEnter * wincmd p
-autocmd VimEnter * nested :NERDTree
+autocmd VimEnter * NERDTree | wincmd p
+"autocmd VimEnter * wincmd p
+"autocmd VimEnter * nested :NERDTree
 
 " Toggle Tree
 nnoremap <silent> <F6> :NERDTreeToggle<CR>
