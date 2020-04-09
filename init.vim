@@ -1,44 +1,25 @@
-" NEO VIM  settings - customized for python
-" Author: Martin Tomes
-
-
-" PLUGIN MANAGER SETTIGS( vim-plug)
-
+if empty(glob('~/.config/nvim/autoload/plug.vim'))
+  silent !curl -fLo ~/.config/nvim/autoload/plug.vim --create-dirs
+    \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+  autocmd!
+  autocmd VimEnter * PlugInstall
+endif
 
 call plug#begin('~/.config/nvim/plugged')
 
-" Utils
+"File Search:
+set rtp+=/usr/local/opt/fzf
+Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
+Plug 'junegunn/fzf.vim'
 
-"Plug 'AndrewRadev/splitjoin.vim'
-Plug 'rizzatti/dash.vim'
-Plug 'wakatime/vim-wakatime'
-Plug 'jiangmiao/auto-pairs'
-Plug 'SirVer/ultisnips'
-Plug 'tpope/vim-surround'
-" Plug 'vim-scripts/vim-auto-save'
-Plug 'mattn/emmet-vim'
+"File Browser:
+Plug 'scrooloose/nerdtree'
+Plug 'scrooloose/nerdcommenter'
+Plug 'jistr/vim-nerdtree-tabs'
+Plug 'mkitt/tabline.vim'
 
-
-""" Autocompletion """
-
-
-"Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' } " Autocompletion engine
-
-" Python autocompletion"
-"Plug 'deoplete-plugins/deoplete-jedi' " Python intellisense 
-
-Plug 'davidhalter/jedi-vim' " Static analysis / function jump
-
-"Plug 'deoplete-plugins/deoplete-go', { 'do': 'make'} " Golang autocompletion
-
-
-" Git
-
-Plug 'tpope/vim-fugitive' " GIT support
-Plug 'airblade/vim-gitgutter' " Git marking
-
-" Appearance
-
+"Appearance:
+Plug 'morhetz/gruvbox'
 Plug 'flazz/vim-colorschemes'
 Plug 'lifepillar/vim-solarized8'
 
@@ -47,99 +28,213 @@ Plug 'vim-airline/vim-airline-themes'
 
 Plug 'ryanoasis/vim-devicons'
 
-"Plug 'vim-syntastic/syntastic'
 
-"Navigation
+"Golang:
+Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
 
-Plug 'scrooloose/nerdtree'
-Plug 'scrooloose/nerdcommenter'
-Plug 'Xuyuanp/nerdtree-git-plugin'
-Plug 'majutsushi/tagbar'
-
-" Python
-
-
+"Python:
+Plug 'davidhalter/jedi-vim' " Static analysis / function jump
 Plug 'neomake/neomake'
 Plug 'sbdchd/neoformat'
 Plug 'jmcantrell/vim-virtualenv'
-
-"Plug 'numirias/semshi', {'do': ':UpdateRemotePlugins'}
-
-Plug 'KeitaNakamura/highlighter.nvim', { 'do': ':UpdateRemotePlugins' }
-
-
-" Golang
-
-"Plug 'fatih/vim-go', { 'branch': 'master' } 
-"Plug 'jodosha/vim-godebug'
-
-
-" Find and replace"
-
-Plug 'ctrlpvim/ctrlp.vim'
-Plug 'brooth/far.vim'
+Plug 'numirias/semshi', {'do': ':UpdateRemotePlugins'}
+"Plug 'KeitaNakamura/highlighter.nvim', { 'do': ':UpdateRemotePlugins' }
+"Plug 'sheerun/vim-polyglot'
+"Plug 'vim-python/python-syntax'
 
 " Devops"
-
 Plug 'chase/vim-ansible-yaml'
 Plug 'ekalinin/Dockerfile.vim'
 
-" Add plugins to &runtimepath
+"Autocomplete:
+Plug 'ncm2/ncm2'
+Plug 'ncm2/ncm2-go'
+Plug 'roxma/nvim-yarp'
+Plug 'roxma/vim-hug-neovim-rpc'
+Plug 'stamblerre/gocode', { 'rtp': 'nvim', 'do': '~/.config/nvim/plugged/gocode/nvim/symlink.sh' }
+
+"Snippets:
+Plug 'ncm2/ncm2-ultisnips'
+Plug 'SirVer/ultisnips'
+
+"Git:
+Plug 'tpope/vim-fugitive'
+Plug 'airblade/vim-gitgutter' " Git marking
+
+"Documentation
+Plug 'rizzatti/dash.vim'
+
+" Monitoring and statistics
+Plug 'wakatime/vim-wakatime'
+
+"Automatic brackets
+Plug 'jiangmiao/auto-pairs'
+Plug 'tpope/vim-surround'
+
+" HTML/web 
+Plug 'mattn/emmet-vim'
+
+"Autosave
+Plug 'vim-scripts/vim-auto-save'
+
+
 call plug#end()
 
+"COPY/PASTE:
+"-----------
+"Increases the memory limit from 50 lines to 1000 lines
+:set viminfo='100,<1000,s10,h
 
+"NUMBERING:
+"----------
+:set number
 
-""" General Settings """
+"INDENTATION:
+"------------
+"Highlights code for multiple indents without reselecting
+vnoremap < <gv
+vnoremap > >gv
 
-set nocompatible                " Enables us Vim specific features
-filetype off                    " Reset filetype detection first ...
-filetype plugin indent on       " ... and enable filetype detection
-set ttyfast                     " Indicate fast terminal conn for faster redraw         
-set laststatus=2                " Show status line always
-set encoding=utf-8              " Set default encoding to UTF-8
-set autoread                    " Automatically read changed files
-set autoindent                  " Enable Autoindent
-set backspace=indent,eol,start  " Makes backspace key more powerful.
-set incsearch                   " Shows the match while typing
-set hlsearch                    " Highlight found searches
-set noerrorbells                " No beeps
-set number                      " Show line numbers
-set showcmd                     " Show me what I'm typing
-set noswapfile                  " Don't use swapfile
-set nobackup                    " Don't create annoying backup files
-set splitright                  " Vertical windows should be split to right
-set splitbelow                  " Horizontal windows should split to bottom
-set autowrite                   " Automatically save before :next, :make etc.
-set hidden                      " Buffer should still exist if window is closed
-set fileformats=unix,dos,mac    " Prefer Unix over Windows over OS 9 formats
-set noshowmatch                 " Do not show matching brackets by flickering
-set noshowmode                  " We show the mode with airline or lightline
-set ignorecase                  " Search case insensitive...
-"set smartcase                   " ... but not it begins with upper case
-"set completeopt=longest,noinsert    " Show popup menu, even if there is one entry
-set pumheight=14                " Completion window max size
-"set nocursorcolumn              " Do not highlight column (speeds up highlighting)
-set nocursorline                " Do not highlight cursor (speeds up highlighting)
-set lazyredraw                  " Wait to redraw
-set t_Co=256
+"COLOR:
+"------
+colorscheme gruvbox
+
+"AUTOCOMPLETE:
+"-------------
+augroup ncm2
+  au!
+  autocmd BufEnter * call ncm2#enable_for_buffer()
+  set completeopt=noinsert,menuone
+  au User Ncm2PopupOpen set completeopt=noinsert,menuone
+  au User Ncm2PopupClose set completeopt=menuone
+augroup END
+
+"Press Enter to select item in autocomplete popup
+
+inoremap <silent> <expr> <CR> (pumvisible() ? ncm2_ultisnips#expand_or("\<CR>") : "\<CR>")
+
+"Cycle through completion entries with tab/shift+tab
+
+inoremap <expr> <TAB> pumvisible() ? "\<c-n>" : "\<TAB>"
+inoremap <expr> <s-tab> pumvisible() ? "\<c-p>" : "\<TAB>"
+
+"Allow getting out of pop with Down/Up arrow keys
+
+inoremap <expr> <down> pumvisible() ? "\<C-E>" : "\<down>"
+inoremap <expr> <up> pumvisible() ? "\<C-E>" : "\<up>"
+
+" Autmatically select and expand first candidate
+" set completeopt=noinsert,menuone
+
+"SNIPPETS:
+"---------
+"Change default expand since TAB is used to cycle options
+
+let g:UltiSnipsExpandTrigger="<c-j>"
+let g:UltiSnipsJumpForwardTrigger="<c-j>"
+let g:UltiSnipsJumpBackwardTrigger="<c-k>"
+
+"FILE SEARCH:
+"------------
+
+set rtp+=/usr/local/opt/fzf
+
+"allows FZF to open by pressing CTRL-F
+
+map <C-f> :FZF<CR>
+
+"allow FZF to search hidden 'dot' files
+
+let FZF_DEFAULT_COMMAND='rg --hidden""'
+
+"FILE BROWSER:
+"-------------
+"allows NERDTree to open/close by typing 'n' then 't'
+
+map nt :NERDTreeTabsToggle<CR>
+
+"Start NERDtree when dir is selected (e.g. "vim .") and start NERDTreeTabs
+
+let g:nerdtree_tabs_open_on_console_startup=2
+
+"Add a close button in the upper right for tabs
+
+let g:tablineclosebutton=1
+
+"Automatically find and select currently opened file in NERDTree
+
+let g:nerdtree_tabs_autofind=1
+
+"Add folder icon to directories
+
+let g:WebDevIconsUnicodeDecorateFolderNodes = 1
+let g:DevIconsEnableFoldersOpenClose = 1
+
+"Hide expand/collapse arrows
+
+let g:NERDTreeDirArrowExpandable = "\u00a0"
+let g:NERDTreeDirArrowCollapsible = "\u00a0"
+let g:WebDevIconsNerdTreeBeforeGlyphPadding = ""
+highlight! link NERDTreeFlags NERDTreeDir
+
+"SHORTCUTS:
+"----------
+"Open file at same line last closed
+if has("autocmd")
+  au BufReadPost * if line("'\"") > 0 && line("'\"") <= line("$")
+  \| exe "normal! g'\"" | endif
+endif
+
+"SOURCING:
+"---------
+"Automatically reloads neovim configuration file on write (w)
+
+autocmd! bufwritepost init.vim source %
+
+"MOUSE:
+"------
+"Allow using mouse helpful for switching/resizing windows
+
+set mouse+=a
+if &term =~ '^screen'
+  " tmux knows the extended mouse mode
+  set ttymouse=xterm2
+endif
+
+"TEXT SEARCH:
+"------------
+"Makes Search Case Insensitive
+
+set ignorecase
+
+"SWAP:
+"-----
+"set dir=~/.local/share/nvim/swap/
+set noswapfile " Don't use swapfile
+
+"GIT (FUGITIVE):
+"---------------
+map fgb :Gblame<CR>
+map fgs :Gstatus<CR>
+map fgl :Glog<CR>
+map fgd :Gdiff<CR>
+map fgc :Gcommit<CR>
+map fga :Git add %:p<CR>
+
+"SYNTAX HIGHLIGHTING:
+"--------------------
 syntax on
-set modifiable
-"set infercase
-set noexpandtab tabstop=4 shiftwidth=4
-set cmdheight=2
-set listchars=tab:\|\ ,trail:▫
+syntax enable
 
-set completeopt+=menuone   " show the popup menu even when there is only 1 match
-set completeopt+=noinsert  " don't insert any text until user chooses a match
-set completeopt-=longest   " don't insert the longest common text
+"HIGHLIGHTING:
+"-------------
+" <Ctrl-l> redraws the screen and removes any search highlighting.
 
+nnoremap <silent> <C-l> :nohl<CR><C-l>
 
 
 
 """ APPEARANCE
-
-syntax on
-syntax enable
 
 autocmd ColorScheme * highlight ExtraWhitespace ctermbg=red guibg=red
 
@@ -159,6 +254,12 @@ set background=dark
 hi Pmenu ctermfg=NONE ctermbg=236 cterm=NONE guifg=NONE guibg=#64666d gui=NONE
 hi PmenuSel ctermfg=NONE ctermbg=24 cterm=NONE guifg=NONE guibg=#204a87 gui=NONE
 
+" CursorLine.
+" Highlight the current line the cursor is on
+
+set cursorline
+highlight CursorLine ctermfg=NONE ctermbg=23 cterm=NONE
+
 
 set colorcolumn=80
 highlight ColorColumn ctermbg=darkgray
@@ -169,8 +270,6 @@ set guicursor=i:ver25-iCursor
 let &t_SI = "\<Esc>Ptmux;\<Esc>\<Esc>]50;CursorShape=1\x7\<Esc>\\"
 let &t_SR = "\<Esc>Ptmux;\<Esc>\<Esc>]50;CursorShape=2\x7\<Esc>\\"
 let &t_EI = "\<Esc>Ptmux;\<Esc>\<Esc>]50;CursorShape=0\x7\<Esc>\\"
-
-
 
 """ CONTROLLS
 
@@ -196,57 +295,12 @@ nmap <CR> o<Esc>
 inoremap <C-]> <C-o>$
 "inoremap <C-[> <C-o>0
 
-""" Search
 
-" Open quickfix window vertically with width of 60"
-nnoremap F *:grep! "\b<C-R><C-W>\b"<CR>:vertical cw 60<CR><CR>
+""" Dash """
 
-" Quickfix navigation"
-nnoremap <silent> <leader>] :cnext<CR>  
-nnoremap <silent> <leader>[ :cprevious<CR>
-
-" close quickfix"
-nnoremap qw :ccl<CR>
-
-"Open quick fix"
-nmap <c-f> :cw<CR>
-
-
-" Turn off search highlights"
-map <Esc> :noh<cr>
-
-
-" The Silver Searcher
-if executable('ag')
-  " Use ag over grep
-  set grepprg=ag\ --nogroup\ --nocolor
-
-  " Use ag in CtrlP for listing files. Lightning fast and respects .Gitignore
-  let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'                         
-
-  " ag is fast enough that CtrlP doesn't need to cache
-  let g:ctrlp_use_caching = 0
-endif
-
-"if executable('ag')
-""  let g:ackprg = 'ag --vimgrep'
-"endif
-
-
-
-" COPY, PASTE, SAVE, CUT, UNDO
-
-" " Copy to clipboard
-"vnoremap  <c-y>  "+y
-"nnoremap  <c-Y>  "+yg_
-"nnoremap  <c-y>  "+y
-"nnoremap  <c-yy> "+yy
-
-" " Paste from clipboard
-"nnoremap <c-v> "+p
-"nnoremap <c-V> "+P
-"noremap <c-V> "+p
-"vnoremap <c-v> "+P
+" Open doc for a word under cursor
+inoremap <F10> <Esc>:Dash <CR> i
+nnoremap <F10> :Dash <CR>
 
 " Cursor move in insert mode with Alt-"
 inoremap ˙ <C-o>h
@@ -263,13 +317,42 @@ vnoremap <C-j> :m '>+1<CR>gv=gv
 vnoremap <C-k> :m '<-2<CR>gv=gv
 
 "Map F12 to save in any mode
-noremap <silent> <F12>          :update<CR>
-vnoremap <silent> <F12>         <C-C>:update<CR>
-inoremap <silent> <F12>         <C-O>:update<CR><Esc>
+noremap <silent> <C-s>          :update<CR>
+vnoremap <silent> <C-s>         <C-C>:update<CR>
+inoremap <silent> <C-s>         <C-O>:update<CR><Esc>
 
 " close
 nnoremap <c-q> :q <CR><CR>
 inoremap <c-q> <Esc>:wq <CR><CR>
+
+" intelligent comments
+set comments=sl:/*,mb:\ *,elx:\ */
+
+
+""" Auto save """
+
+"NOTE: conflicting with gofmt on save
+
+"let g:auto_save = 1
+"let g:auto_save_silent = 0
+"let g:auto_save_no_updatetime = 0
+
+"" Tagbar """
+
+" autostart
+"let g:tagbar_autoshowtag = 1
+"autocmd VimEnter * nested :TagbarOpen
+
+" Toggle tagbar
+nnoremap <silent> <F5> :TagbarToggle<CR>
+
+" Tagbar settings
+let g:tagbar_width = 30
+let g:tagbar_left = 1
+let g:tagbar_autoshowtag = 1
+
+" Emmet"
+"let g:user_emmet_leader_key='-'
 
 " intelligent comments
 set comments=sl:/*,mb:\ *,elx:\ */
@@ -293,160 +376,10 @@ highlight ColorColumn ctermbg=darkgray
 inoremap {<CR> {<CR>}<C-o>O
 
 
+""" Refactoring
 
+" For local replace
+nnoremap gr gd[{V%::s/<C-R>///gc<left><left><left>
 
-
-""" PLUGINS SETTINGS """
-
-""" Kite python autocompletion """"
-
-"let g:kite_auto_complete=0
-
-"let g:kite_tab_complete=1
-
-"set completeopt+=menuone   " show the popup menu even when there is only 1 match
-
-"set completeopt+=preview
-
-"automatically close preview window"
-"autocmd CompleteDone * if !pumvisible() | pclose | endif 
-
-"let g:kite_documentation_continual=1
-
-"set statusline=%<%f\ %h%m%r%{kite#statusline()}%=%-14.(%l,%c%V%)\ %P
-"set laststatus=2  " always display the status line
-
-"nmap <silent> <buffer> gK <Plug>(kite-docs)
-"imap <silent> <buffer> gK <Plug>(kite-docs)
-
-
-""" Virtualenv """
-let g:virtualenv_auto_activate = 1
-
-
-
-""" Semshi syntax highlight """
-
-
-let g:semshi#simplify_markup = 0
-
-
-""" Ultisnips """
-
-let g:go_snippet_engine = "ultisnips"
-let g:UltiSnipsExpandTrigger="<tab>"
-
-
-
-""" jedi-vim """
-
-" disable autocompletion, cause we use deoplete or kite for completion
-let g:jedi#completions_enabled = 0
-
-" open the go-to function in split, not another buffer
-"let g:jedi#use_splits_not_buffers = "right"
-
-let g:jedi#auto_vim_configuration = 1
-"let g:jedi#show_call_signatures = 2
-
-
-
-""" Neoformat """
-
-" Enable alignment
-let g:neoformat_basic_format_align = 1
-
-" Enable tab to spaces conversion
-let g:neoformat_basic_format_retab = 1
-
-" Enable trimmming of trailing whitespace
-let g:neoformat_basic_format_trim = 1
-
-
-
-""" Neomake """
-
-let g:neomake_python_enabled_makers = ['pylint']
-call neomake#configure#automake('nrwi', 500)
-
-
-
-
-""" Neopairs """
-"let g:neopairs#enable = 1
-
-
-
-
-""" Dash """
-
-" Open doc for a word under cursor
-inoremap <F10> <Esc>:Dash <CR> i
-nnoremap <F10> :Dash <CR>
-
-
-""" Auto save """
-
-"NOTE: conflicting with gofmt on save
-
-"let g:auto_save = 1
-"let g:auto_save_silent = 1
-"let g:auto_save_no_updatetime = 0
-
-
-""" NerdTree ""
-
-" autostart and put cursor in working window
-" NOTE: Currently turned of because of plugin conflicr (git branch name not showed in status/ariline)
-autocmd VimEnter * NERDTree | wincmd p
-"autocmd VimEnter * wincmd p
-"autocmd VimEnter * nested :NERDTree
-
-" Toggle Tree
-nnoremap <silent> <F6> :NERDTreeToggle<CR>
-
-" Tree settings
-let g:NERDTreeWinSize=25
-let g:NERDTreeShowHidden=0
-let g:NERDTreeMapOpenRecursively=1
-let g:NERDTreeWinPos="left"
-
-
-
-
-"" Tagbar """
-
-" autostart
-"let g:tagbar_autoshowtag = 1
-"autocmd VimEnter * nested :TagbarOpen
-
-" Toggle tagbar
-nnoremap <silent> <F5> :TagbarToggle<CR>
-
-" Tagbar settings
-let g:tagbar_width = 30
-let g:tagbar_left = 1
-let g:tagbar_autoshowtag = 1
-
-
-
-" Emmet"
-"let g:user_emmet_leader_key='-'
-
-
-
-""" Deoplete """
-
-" Autostart
-"let g:deoplete#enable_at_startup = 1
-
-" Close popup and fill candidate with Enter
-"inoremap <expr><CR> pumvisible()? "\<C-y>" : "\<CR>"
-  
-"call deoplete#custom#source('_', 'converters', ['converter_auto_paren'])
-
-"autocmd InsertLeave,CompleteDone * if pumvisible() == 0 | pclose | endif
-
-"let g:python3_host_prog = '/Users/martin/.config/nvim/env/bin/python3'
-
-
+" For global replace
+nnoremap gR gD:%s/<C-R>///gc<left><left><left>

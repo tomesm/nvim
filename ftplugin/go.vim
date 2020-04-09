@@ -1,5 +1,30 @@
 " Go settings"
 
+setlocal tabstop=4
+setlocal shiftwidth=4
+setlocal expandtab
+setlocal autoindent
+setlocal smarttab
+setlocal formatoptions=croql
+
+set colorcolumn=100
+highlight ColorColumn ctermbg=darkgray   
+
+" Go mappings"
+
+nmap <Leader>i <Plug>(go-info)
+nmap <Leader>gd <Plug>(go-doc)
+nmap <Leader>r <Plug>(go-run)
+nmap <Leader>b <Plug>(go-build)
+nmap <Leader>t <Plug>(go-test)
+nmap gd <Plug>(go-def-tab)
+
+"" Completion
+
+"let g:deoplete#sources#go#gocode_binary = $GOPATH.'/bin/gocode'
+
+let g:go_snippet_engine = "ultisnips"
+
 " Syntastic"
 
 let g:syntastic_check_on_open = 1
@@ -17,15 +42,13 @@ let g:go_gocode_unimported_packages = 1
 
 set updatetime=100
 
-
 " tell vim to allow you to copy between files, remember your cursor
 " position and other little nice things like that
 
 set viminfo='100,\"2500,:200,%,n~/.viminfo
 
 
-" vim-go
-" use goimports for formatting
+" formatting
 
 let g:go_fmt_command = "goimports"
 
@@ -52,6 +75,7 @@ let g:go_highlight_variable_declarations = 1
 
 " build_go_files is a custom function that builds or compiles the test file.
 " It calls :GoBuild if its a Go file, or :GoTestCompile if it's a test file
+
 function! s:build_go_files()
   let l:file = expand('%')
   if l:file =~# '^\f\+_test\.go$'
@@ -61,22 +85,6 @@ function! s:build_go_files()
   endif
 endfunction
 
-" fugitive git bindings
-nnoremap <space>ga :Git add %:p<CR><CR>
-nnoremap <space>gs :Gstatus<CR>
-nnoremap <space>gc :Gcommit -v -q<CR>
-nnoremap <space>gt :Gcommit -v -q %:p<CR>
-nnoremap <space>gd :Gvdiff<CR>
-nnoremap <space>ge :Gedit<CR>
-nnoremap <space>gr :Gread<CR>
-nnoremap <space>gw :Gwrite<CR><CR>
-nnoremap <space>gl :silent! Glog<CR>:bot copen<CR>
-nnoremap <space>gp :Ggrep<Space>
-nnoremap <space>gm :Gmove<Space>
-nnoremap <space>gb :Git branch<Space>
-nnoremap <space>go :Git checkout<Space>
-nnoremap <space>gps :Dispatch! git push<CR>
-nnoremap <space>gpl :Dispatch! git pull<CR>
 
 let g:tagbar_type_go = {
     \ 'ctagstype' : 'go',
