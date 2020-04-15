@@ -50,7 +50,7 @@ set viminfo='100,\"2500,:200,%,n~/.viminfo
 
 " formatting
 
-let g:go_fmt_command = "goimports"
+let g:go_fmt_command = "goreturns"
 
 "linter"
 set rtp+=$GOPATH/src/golang.org/x/lint/misc/vim
@@ -112,4 +112,9 @@ let g:tagbar_type_go = {
     \ },
     \ 'ctagsbin'  : 'gotags',
     \ 'ctagsargs' : '-sort -silent'
+\ }
+
+let g:go_debug_windows = {
+      \ 'vars':       'rightbelow 60vnew',
+      \ 'stack':      'rightbelow 10new',
 \ }

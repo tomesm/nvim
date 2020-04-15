@@ -145,10 +145,13 @@ map <C-f> :FZF<CR>
 
 "allow FZF to search hidden 'dot' files
 
-let FZF_DEFAULT_COMMAND='rg --hidden""'
+let FZF_DEFAULT_COMMAND='ag --hidden""'
 
 "FILE BROWSER:
 "-------------
+" Nerdtree autostart
+autocmd VimEnter * NERDTree | wincmd p
+
 "allows NERDTree to open/close by typing 'n' then 't'
 
 map nt :NERDTreeTabsToggle<CR>
@@ -383,3 +386,23 @@ nnoremap gr gd[{V%::s/<C-R>///gc<left><left><left>
 
 " For global replace
 nnoremap gR gD:%s/<C-R>///gc<left><left><left>
+
+
+" QUICK FIX NAvigation
+" Open quickfix window vertically with width of 60"
+nnoremap F *:grep! "\b<C-R><C-W>\b"<CR>:vertical cw 60<CR><CR>
+
+" Quickfix navigation"
+nnoremap <silent> <leader>] :cnext<CR>  
+nnoremap <silent> <leader>[ :cprevious<CR>
+
+" close quickfix"
+nnoremap qw :ccl<CR>
+
+"Open quick fix"
+nmap <c-f> :cw<CR>
+
+"Git Gutter
+highlight GitGutterAdd     ctermfg=2 ctermbg=0
+highlight GitGutterChange   ctermfg=3 ctermbg=0
+highlight GitGutterDelete  ctermfg=1 ctermbg=0
